@@ -1,5 +1,6 @@
 import React from "react";
-import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from "react-router-dom";
+import { createRoot } from 'react-dom/client';
 import liff from "@line/liff";
 import App from "./App";
 
@@ -23,7 +24,9 @@ const liffCreate = async () => {
   } else {
     createRoot(container!).render(
       <React.StrictMode>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </React.StrictMode>,
     );
   }

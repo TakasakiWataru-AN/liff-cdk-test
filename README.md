@@ -12,14 +12,15 @@
 ## ファイル構成
 
 以下のファイルを修正する際は扱うことになると考えられる。  
-`bin`と`lib`は CloudFormation 用スタック定義ファイル。  
+`iac`は cdk スタック定義ディレクトリ。
 `LiffTest`ディレクトリは`npx @line/create-liff-app`によって自動生成されたもの。
 ```
 \
-┣ bin
-┃ ┗ liff-cdk-test.ts：cdk 起動時に呼ばれるスクリプト
-┣ lib
-┃ ┗ liff-cdk-test-stack.ts：CloudFormation 構築スクリプト
+┣ iac
+┃ ┣ bin
+┃ ┃ ┗ liff-cdk-test.ts：cdk 起動時に呼ばれるスクリプト
+┃ ┗ lib
+┃   ┗ liff-cdk-test-stack.ts：CloudFormation 構築スクリプト
 ┗ LiffTest：npx @line/create-liff-app が自動生成
   ┣ src
   ┃ ┣ App.css：画面のスタイルシート定義
@@ -32,7 +33,7 @@
 
 ## 環境変数設定について
 
-以下を用意してください。
+LiffTest/.env に以下を用意してください。
 ```
 VITE_LIFF_ID=LIFF ID
 VITE_ENV=dev
@@ -44,14 +45,8 @@ VITE_ENV=dev
 
 ビルド・デプロイするときは以下。
 ```
-npm run build（※LiffTest 側もビルドに行ってエラーになります）
-cd LiffTest
-rm src/App.d.tx（※一度ファイルを消しておく必要があります）
-rm src/App.js（※同上）
 npm run build
-cd ..
 ※AWS の asume role しておく
-cdk bootstrap（※初回のみ）
-cdk deploy
+npm run bootstrap -w iac（※初回のみ）
+npm run deploy -w iac
 ```
-IaC は分離しておく必要がありますのでいずれ修正します。

@@ -59,7 +59,7 @@ export class LiffCdkTestStack extends cdk.Stack {
     );
 
     new s3deploy.BucketDeployment(this, 'LiffTestDeploy', {
-      sources: [s3deploy.Source.asset('./LiffTest/dist')],
+      sources: [s3deploy.Source.asset('../LiffTest/dist')],
       destinationBucket: liffTestBucket,
       distribution: liffTestDistribution,
       distributionPaths: ['/*'],
